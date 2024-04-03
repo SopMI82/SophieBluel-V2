@@ -7,8 +7,29 @@ const generateBtn = async () => {
     const categories = await getCategories();
 
     categories.forEach(category => {
-        const btn = `<button id="${category.id}"> ${category.name}</button>`
-        filters.insertAdjacentHTML('beforeend', btn)
+        const btn = `<button id="${category.id}" class="filter"> ${category.name}</button>`;
+        filters.insertAdjacentHTML('beforeend', btn);
+    })
+}
+
+/**
+ * Fonction qui trie les projets par catégorie
+ */
+const sortWorks = () => {
+    const localWorks = JSON.parse(window.localStorage.getItem('works'));
+    const sortButtons = document.querySelectorAll('.filter');
+    sortButtons.forEach(sortButton => {
+        sortButton.addEventListener('click', (event) => {
+            if (item => item.categoryId === event.target.id) {
+                const selectedWorks = localWorks.filter(item => item.categoryId == event.target.id);
+                gallery.innerHTML = "";
+                createFigures(selectedWorks);
+            }
+            if (event.target.id === '0') {
+                gallery.innerHTML = "";
+                createFigures(localWorks);
+            }
+        })
     })
 }
 
@@ -16,29 +37,8 @@ const generateBtn = async () => {
  * Fonction qui gère les filtres
  */
 const manageCategories = async () => {
-
-    generateBtn()
-
-    
-    }
-
-manageCategories()
-
-const sortWorks = () => {
-    const localWorks = window.localStorage.getItem('works')
-
-    console.log(localWorks);
-
+    await generateBtn();
+    sortWorks()
 }
 
-sortWorks()
-
-/*
-        btnEvent.addEventListener('click', (event) => {
-            works = works.filter(work => work.categoryId === event.target.id)
-            gallery.innerHTML = "";
-            createFigures(works);
-            // le tri ne se fait plus.
-            //Parce que quand j'appelle la fonction generer project
-            //elle fait un appel à l'api et écrase la demande localWorks ?
-        })*/
+manageCategories()

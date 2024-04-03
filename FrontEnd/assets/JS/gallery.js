@@ -13,9 +13,9 @@ const createFigures = (works) => {
 
 const genererProjects = async () => {
     const works = await getWorks();
-    const worksList = JSON.stringify(works)
-    window.localStorage.setItem('works', worksList)
-    createFigures(works)
+    const worksList = JSON.stringify(works);
+    window.localStorage.setItem('works', worksList);
+    createFigures(works);
 }
 
 genererProjects()

@@ -3,7 +3,7 @@ const generateHeader = () => {
     return {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-    }
+    };
 }
 
 const fetchData = async (url, options) => {
