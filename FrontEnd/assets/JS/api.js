@@ -19,3 +19,11 @@ const getWorks = async () => {
     return fetchData('http://localhost:5678/api/works', { method: 'GET' });
 };
 
+/**
+ * Récupération des categories depuis l'API
+ *  * @returns
+ */
+const getCategories = async () => {
+    return fetchData('http://localhost:5678/api/categories', { method: 'GET' });
+}
+

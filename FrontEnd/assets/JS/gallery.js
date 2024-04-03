@@ -1,15 +1,7 @@
-console.log("hello world");
-
 const gallery = document.querySelector('.gallery');
 
-
-const genererProjects = async () => {
-
-    const works = await getWorks();
-
-console.log(works);
-
-    works.forEach(work => {
+const createFigures = (works) => {
+    works.forEach((work) => {
         gallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
@@ -17,6 +9,13 @@ console.log(works);
             </figure>
         `)
     });
+}
+
+const genererProjects = async () => {
+    const works = await getWorks();
+    const worksList = JSON.stringify(works)
+    window.localStorage.setItem('works', worksList)
+    createFigures(works)
 }
 
 genererProjects()
