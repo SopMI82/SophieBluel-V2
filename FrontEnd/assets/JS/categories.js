@@ -25,9 +25,13 @@ const manageCategories = async () => {
 manageCategories()
 
 const sortWorks = () => {
-    const btnEvent = document.getElementById(category.id)
+    const localWorks = window.localStorage.getItem('works')
+
+    console.log(localWorks);
 
 }
+
+sortWorks()
 
 /*
         btnEvent.addEventListener('click', (event) => {
