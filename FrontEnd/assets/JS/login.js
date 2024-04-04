@@ -40,6 +40,7 @@ const sendForm = async () => {
     const response = await fetch('http://localhost:5678/api/users/login', options);
     return await response.json();
 }
+
 /**
  * Ecouteur d'évenement qui déclenche la connection
  */
