@@ -7,7 +7,9 @@ const errorBox = document.querySelector('.errorBox');
  */
 const succes = (response) => {
     const token = response.token;
+    const user = response.userId;
     localStorage.setItem('token', token);
+    localStorage.setItem('user', user);
     window.location.href = "../../index.html";
 }
 
