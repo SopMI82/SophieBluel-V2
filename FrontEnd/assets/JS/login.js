@@ -7,16 +7,14 @@ const errorBox = document.querySelector('.errorBox');
  */
 const succes = (response) => {
     const token = response.token;
-    console.log(token);
-    localStorage.getItem('token', token);
-    console.log("connection reussie");
+    localStorage.setItem('token', token);
+    window.location.href = "../../index.html";
 }
 
 /**
  * Fonction qui retourne un message d'erreur en cas d'echec
  */
 const error = () => {
-    console.log("erreur");
     errorBox.insertAdjacentHTML('afterbegin', "<p>Email ou mot de passe incorrect</p>");
 }
 
