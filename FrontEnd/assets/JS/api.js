@@ -27,3 +27,19 @@ const getCategories = async () => {
     return fetchData('http://localhost:5678/api/categories', { method: 'GET' });
 }
 
+
+/**
+ * Supprimer un projet dans l'API
+ * @param {*} projectId
+ */
+const deleteWork = async (projectId) => {
+    return fetchData(`http://localhost:5678/api/works/${projectId}`, { method: 'DELETE', headers: generateHeader() })
+}
+
+/**
+ * Créer un projet dans l'API
+ */
+const sendForm = async (projectToAdd) => {
+    const options = { method: 'POST', headers: generateHeader(), body: projectToAdd }
+    return fetchData(`http://localhost:5678/api/works`, options)
+}

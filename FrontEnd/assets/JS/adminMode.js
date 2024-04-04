@@ -1,10 +1,7 @@
-console.log("helloWorld");
-
 const main = document.querySelector('main');
 const logBtn = document.querySelector('.logBtn');
 const adminBanner = document.querySelector('.adminBanner');
 const btnEdit = document.getElementById('edit');
-console.log(logBtn, adminBanner, btnEdit);
 
 /****** ELEMENT HTML *********/
 const displayEditModal = () => `<button onClick="displayModal()" class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>`;
@@ -27,7 +24,6 @@ const isConnected = () => {
  * Fonction qui affiche les éléments admin
  */
 const enableAdmin = () => {
-    console.log("modeAdmin activé");
     logBtn.innerHTML = "";
     logBtn.insertAdjacentHTML("afterbegin", displayLogout());
     adminBanner.insertAdjacentHTML("afterbegin", displayAdminBanner());
@@ -51,7 +47,6 @@ window.addEventListener("load", () => {
     if (isConnected()) {
         enableAdmin();
     } else {
-        console.log("modeAdmin desactivé");
         disabledAdmin();
     }
 })
