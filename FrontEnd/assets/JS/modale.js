@@ -13,11 +13,7 @@ const displayModal = () => {
 }
 
 /**
- * Fonction qui supprime la modale au clic sur le background
- */
-
-/**
- * Fonction qui supprime la modale au clic sur la croix
+ * Fonction qui supprime la modale au clic sur la croix ou le background
  */
 const closeModal = () => {
     const closePopup = document.querySelector('.closePopup');
@@ -26,6 +22,11 @@ const closeModal = () => {
     closePopup.addEventListener("click", () => {
         popup.remove()
     })
+/** je n'arrive pas à cibler juste le fond,
+ * ça  supprime aussi au clic sur la modale
+    popup.addEventListener("click", () => {
+        popup.remove()
+    })*/
 }
 
 /**

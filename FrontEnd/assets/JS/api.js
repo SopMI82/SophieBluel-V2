@@ -1,5 +1,5 @@
 const generateHeader = () => {
-    const token = window.sessionStorage.getItem("token");
+    const token = window.localStorage.getItem("token");
     return {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -39,7 +39,8 @@ const deleteWork = async (projectId) => {
 /**
  * Créer un projet dans l'API
  */
-const sendForm = async (projectToAdd) => {
-    const options = { method: 'POST', headers: generateHeader(), body: projectToAdd }
+const sendForm = async (newProject) => {
+    console.log("test");
+    const options = { method: 'POST', headers: generateHeader(), body: newProject }
     return fetchData(`http://localhost:5678/api/works`, options)
 }
