@@ -5,6 +5,8 @@ const filters = document.getElementById('filters');
  */
 const generateBtn = async () => {
     const categories = await getCategories();
+    const catList = JSON.stringify(categories);
+    window.localStorage.setItem('categories', catList);
 
     categories.forEach(category => {
         const btn = `<button id="${category.id}" class="filter"> ${category.name}</button>`;
@@ -40,5 +42,4 @@ const manageCategories = async () => {
     await generateBtn();
     sortWorks()
 }
-
 manageCategories()
