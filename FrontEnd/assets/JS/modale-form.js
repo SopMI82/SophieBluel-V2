@@ -1,4 +1,4 @@
-const newProject = new FormData();
+const addedProject = new FormData();
 /**
  * Contrôle le formulaire à chaque changement
  */
@@ -6,7 +6,7 @@ const validForm = () => {
     const explore = document.getElementById('explore');
     const inputProject = document.getElementById('projectName');
     const baliseSelect = document.getElementById('projectCategory');
-    
+
     explore.addEventListener('change', () => {
         validImg()
     })
@@ -37,7 +37,7 @@ const validImg = () => {
             return false
         }
         console.log(photo);
-        newProject.append('imageURL', photo);
+        addedProject.append('imageURL', photo);
         enableAdd()
 
         return true
@@ -63,9 +63,8 @@ const validTitle = () => {
             return false;
         }
         console.log(title);
-        newProject.append('title', title);
+        addedProject.append('title', title);
         enableAdd()
-
         return true;
     } catch (error) {
         displayError(error.message);
@@ -86,7 +85,7 @@ const validCat = () => {
             return false;
         }
         console.log(category);
-        newProject.append('categoryId', category);
+        addedProject.append('categoryId', category);
         enableAdd()
 
         return true
@@ -115,33 +114,57 @@ const removeError = () => {
  * Fonction qui active le bouton de soumission du formulaire
  */
 const enableAdd = () => {
-    const btn = document.getElementById('addNewProject');
-    const category = newProject.get('categoryId');
-    const title = newProject.get('title');
-    const image = newProject.get('imageURL');
+    const btnAdd = document.getElementById('btnAdd');
+    const category = addedProject.get('categoryId');
+    const title = addedProject.get('title');
+    const image = addedProject.get('imageURL');
 
     if (!!category & !!title & !!image) {
-        btn.removeAttribute('disabled')
+        btnAdd.removeAttribute('disabled')
     }
 }
 
 /**
-     * Fonction chargée de publier le nouveau projet
-     */
+ * Fonction qui implemente la gallerie avec le projet qui vient d'etre ajouté
+ * @param {*} addedProject 
+ */
+const addNewFigure = (addedProject) => {
+    const gallery = document.querySelector('.gallery');
+    const miniGallery = document.querySelector(".miniGallery");
+    gallery.insertAdjacentHTML('beforeend', `
+            <figure>
+                <img src="${addedProject.imageUrl}">
+                <figcaption>${addedProject.title}</figcaption>
+            </figure>
+        `);
+    miniGallery.insertAdjacentHTML('beforeend', `
+            <figure>
+                <img src="${addedProject.imageUrl}">
+                <button onClick="deleteWork(${addedProject.id})" class="btnTrash" id="${addedProject.id}"><i class="fa-regular fa-trash-can"></i></button>
+            </figure>
+        `); // va peut etre poser pb car à ce moment là, miniGallery n'existe pas, en plus add new project ne contient pas d'id
+}
+
+/**
+ * Fonction chargée de publier le nouveau projet
+ */
 const publishProject = () => {
-    const addNewProject = document.querySelector('.addNewProject');
+    const btnAdd = document.querySelector('.btnAdd');
 
-    addNewProject.addEventListener('click', async (event) => {
+    btnAdd.addEventListener('click', async (event) => {
         event.preventDefault();
-        console.log(newProject);
+        console.log(addedProject);
 
-        await sendForm(newProject);
+        await sendForm(addedProject);
         if (Response.ok) {
+            console.log("Projet créé avec succès");
+
+            addNewFigure(addedProject)
             form.reset();
-            //genererProjects()
+            // actualiser le works situé dans le local storage
         }
         else {
-
+            console.log("Echec lors de la création du projet");
         }
     })
 }

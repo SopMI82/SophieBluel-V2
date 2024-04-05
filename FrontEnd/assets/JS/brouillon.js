@@ -1,3 +1,34 @@
+const addNewFigure = (addedProject) => {
+    const gallery = document.querySelector('.gallery');
+    const miniGallery = document.querySelector(".miniGallery");
+        gallery.insertAdjacentHTML('beforeend', `
+            <figure>
+                <img src="${addedProject.imageUrl}">
+                <figcaption>${addedProject.title}</figcaption>
+            </figure>
+        `);
+        miniGallery.insertAdjacentHTML('beforeend', `
+            <figure>
+                <img src="${addedProject.imageUrl}">
+                <button onClick="deleteWork(${addedProject.id})" class="btnTrash" id="${addedProject.id}"><i class="fa-regular fa-trash-can"></i></button>
+            </figure>
+        `)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //controlForm();
 //publishProject();
@@ -46,7 +77,7 @@ const controlForm = () => {
      * Fonction qui active le bouton de soumission du formulaire
      */
     const enableAdd = () => {
-        const btn = document.getElementById('addNewProject');
+        const btn = document.getElementById('btnAdd');
         const category = projectToAdd.get('category');
         const title = projectToAdd.get('title');
         const image = projectToAdd.get('image');
@@ -65,9 +96,9 @@ const controlForm = () => {
      * Fonction chargée de publier le nouveau projet
      */
 const publishProject = () => {
-    const addNewProject = document.querySelector('.addNewProject');
+    const btnAdd = document.querySelector('.btnAdd');
 
-    addNewProject.addEventListener('click', async (event) => {
+    btnAdd.addEventListener('click', async (event) => {
         event.preventDefault();
 
         await sendForm();
@@ -76,7 +107,7 @@ const publishProject = () => {
             //genererProjects()
         }
         else {
-            
+
         }
     })
 }

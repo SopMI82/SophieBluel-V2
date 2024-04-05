@@ -25,7 +25,7 @@ const modalPageTwo = `<div class="popupNav">
                 </select>
                 <div class="errorBox"></div>
 				<div class="lineDecor">
-                    <input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
+                    <input class="btnAdd" id="btnAdd" type="submit" value="Valider" disabled>
 		        </div>
             </form>
 		</div>`
