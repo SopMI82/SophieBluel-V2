@@ -29,7 +29,7 @@ const getCategories = async () => {
 
 
 /**
- * Supprimer un projet dans l'API
+ * Supprimer un projet dans l'API //////////// a verifier après resolution du pb backend
  * @param {*} projectId
  */
 const deleteWork = async (projectId) => {
@@ -37,7 +37,7 @@ const deleteWork = async (projectId) => {
 }
 
 /**
- * Créer un projet dans l'API
+ * Créer un projet dans l'API //////////// a verifier après resolution du pb backend
  */
 const sendForm = async (newProject) => {
     console.log("test");
