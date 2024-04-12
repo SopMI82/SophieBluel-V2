@@ -1,5 +1,5 @@
 /****** ELEMENT HTML *********/
-const createModalContainer = () => `<div class="popup">
+const createModalContainer = () => `<div class="popup"">
         <div class="popupContent">
         </div>
         </div>`
@@ -10,10 +10,11 @@ const createModalContainer = () => `<div class="popup">
 const displayModal = () => {
     main.insertAdjacentHTML("beforeend", createModalContainer())
     displayPageOne();
+    closeByBgd();
 }
 
 /**
- * Fonction qui supprime la modale au clic sur la croix ou le background
+ * Fonctions qui suppriment la modale au clic sur la croix ou le background
  */
 const closeModal = () => {
     const closePopup = document.querySelector('.closePopup');
@@ -22,13 +23,18 @@ const closeModal = () => {
     closePopup.addEventListener("click", () => {
         popup.remove()
     })
-/** je n'arrive pas à cibler juste le fond,
- * ça  supprime aussi au clic sur la modale
-    popup.addEventListener("click", () => {
-        popup.remove()
-    })*/
 }
 
+const closeByBgd = () => {
+    const popup = document.querySelector('.popup');
+    
+    popup.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            popup.remove()
+        }
+    })
+} 
+    
 /**
  * fonction qui gère le retour à l'écran précédent
  */

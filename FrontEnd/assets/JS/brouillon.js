@@ -114,3 +114,9 @@ const publishProject = () => {
 
 
 
+const form = document.getElementById('.createProject');
+const addedProject = new FormData();
+addedProject.append('category', categoryVal);
+addedProject.append('title', titleVal);
+addedProject.append('imageUrl', imageFile.file[0]);
+console.log(addedProject);

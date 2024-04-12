@@ -9,7 +9,7 @@ const modalPageTwo = `<div class="popupNav">
         </div>
         <div class="page-two">
 			<h3>Ajout photo</h3>
-			<form action="" class="createProject">
+			<form action="POST"  class="createProject" id="createProject">
 				<div class="selectPhoto">
 					    <label for="explore" class="notice"><i class="fa-regular fa-image"></i></label>
 					    <input id="explore" type="file" accept=".png,.jpeg,.jpg">

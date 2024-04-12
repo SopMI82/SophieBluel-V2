@@ -25,7 +25,6 @@ const displayPageOne = () => {
     closeModal();
 }
 
-
 /**
  * Générer l'affichage de la gallerie dans la popup
  */
@@ -37,7 +36,7 @@ const genererApercu = () => {
 
     localWorks.forEach((item) => {
         miniGallery.insertAdjacentHTML('beforeend', `
-            <figure>
+            <figure id="project${item.id}">
                 <img src="${item.imageUrl}">
                 <button onClick="deleteWork(${item.id})" class="btnTrash" id="${item.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
