@@ -134,11 +134,10 @@ const enableAdd = () => {
  * Fonction qui implemente la gallerie avec le projet qui vient d'etre ajouté
  */
 const addNewFigure = (addedProject) => {
-    const gallery = document.querySelector('.gallery');
     gallery.innerHTML = "";
     gallery.insertAdjacentHTML('beforeend', `
             <figure>
-                <img src="${addedProject.imageUrl}" alt="${addedProject.title}">
+                <img src="${addedProject.image}" alt="${addedProject.title}">
                 <figcaption>${addedProject.title}</figcaption>
             </figure>
         `);
@@ -153,17 +152,25 @@ const publishProject = () => {
 
     btnAdd.addEventListener('click', async (event) => {
         event.preventDefault();
-
+        const gallery = document.querySelector('.gallery');
         const form = document.getElementById('createProject');
         const response = await sendForm(addedProject);
+        const prevNewProject = document.querySelector('.prevNewProject');
+        const notice = document.querySelectorAll('.notice');
+        const errorBox = document.querySelector('.errorBox');
+
+
         if (response.ok) {
             console.log("Projet créé avec succès");
-            addNewFigure(addedProject);
+            gallery.innerHTML = "";
             await genererProjects();
             form.reset();
-            // actualiser le works situé dans le local storage
-            // pour cela il faut d'abord isoler le bout de code qui permet de l'y ajouter
-            // voir gallery.js fonction stockWorks
+            prevNewProject.remove();
+            notice.forEach((item) => {
+                item.hidden = false
+            })
+            errorBox.innerHTML = "Projet ajouté à la galerie"
+            errorBox.classList.add = "succes"
         }
         else {
             console.log("Echec lors de la création du projet");

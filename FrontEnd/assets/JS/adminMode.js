@@ -4,7 +4,7 @@ const adminBanner = document.querySelector('.adminBanner');
 const btnEdit = document.getElementById('edit');
 
 /****** ELEMENT HTML *********/
-const displayEditModal = () => `<button onClick="displayModal()" class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>`;
+const displayEditModal = () => `<button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>`;
 const displayLogout = () => `<a class="logOut">logout</a>`;
 const displayLogIn = () => `<a href="./assets/pages/login.html" class="logIn">login</a>`;
 const displayAdminBanner = () => `<div class="bannerContent">

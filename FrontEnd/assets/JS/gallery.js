@@ -3,7 +3,7 @@ const gallery = document.querySelector('.gallery');
 const createFigures = (works) => {
     works.forEach((work) => {
         gallery.insertAdjacentHTML('beforeend', `
-            <figure>
+            <figure id="${work.id}">
                 <img src="${work.imageUrl}" alt="${work.title}">
                 <figcaption>${work.title}</figcaption>
             </figure>

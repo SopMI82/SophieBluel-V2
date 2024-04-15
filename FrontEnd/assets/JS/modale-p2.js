@@ -71,6 +71,12 @@ const showPreview = () => {
                 item.hidden = true
             })
         }
+        else {
+            prevNewProject.style.display = "none";
+            notice.forEach((item) => {
+                item.hidden = false
+            })
+        }
     })
 }
 

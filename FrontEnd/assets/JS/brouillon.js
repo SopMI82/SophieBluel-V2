@@ -19,7 +19,17 @@ const addNewFigure = (addedProject) => {
 
 
 
+/**
+ * Evenement pour supprimer un projet
+ */
 
+const delProject = () => {
+    const btnTrash = document.querySelector(".btnTrash");
+
+    btnTrash.addEventListener("click", (item) => {
+        deleteWork(item.id);
+    });
+}
 
 
 
