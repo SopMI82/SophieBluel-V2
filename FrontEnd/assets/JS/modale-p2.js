@@ -9,7 +9,7 @@ const modalPageTwo = `<div class="popupNav">
         </div>
         <div class="page-two">
 			<h3>Ajout photo</h3>
-			<form action="" class="createProject">
+			<form action="POST"  class="createProject" id="createProject">
 				<div class="selectPhoto">
 					    <label for="explore" class="notice"><i class="fa-regular fa-image"></i></label>
 					    <input id="explore" type="file" accept=".png,.jpeg,.jpg">
@@ -25,7 +25,7 @@ const modalPageTwo = `<div class="popupNav">
                 </select>
                 <div class="errorBox"></div>
 				<div class="lineDecor">
-                    <input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
+                    <input class="btnAdd" id="btnAdd" type="submit" value="Valider" disabled>
 		        </div>
             </form>
 		</div>`
@@ -63,12 +63,19 @@ const showPreview = () => {
     const prevNewProject = document.querySelector('.prevNewProject');
     const notice = document.querySelectorAll('.notice');
 
+    
     explore.addEventListener('change', (event) => {
         if (event.target.files.length > 0) {
             prevNewProject.src = URL.createObjectURL(event.target.files[0]);
             prevNewProject.style.display = "block";
             notice.forEach((item) => {
                 item.hidden = true
+            })
+        }
+        else {
+            prevNewProject.style.display = "none";
+            notice.forEach((item) => {
+                item.hidden = false
             })
         }
     })

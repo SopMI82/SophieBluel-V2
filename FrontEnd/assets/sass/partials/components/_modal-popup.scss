@@ -1,0 +1,69 @@
+.popup {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: $bg-popup;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+}
+
+.popupNav {
+    width: 580px;
+    box-sizing: border-box;
+    height: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    .btnPopup {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .closePopup {
+        display: flex;
+        justify-items: flex-end;
+    }
+}
+
+.popupContent {
+    width: 630px;
+    height: 690px;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    padding: 25px;
+    align-items: center;
+    background-color: $white;
+    flex-direction: column;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    align-self: center;
+
+    .lineDecor {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+        border-top: 1px solid $dark-grey;
+        background-color: $white;
+        width: 420px;
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    input[type="submit"] {
+        @include btnSubmit;
+        width: 240px;
+    }
+
+
+}

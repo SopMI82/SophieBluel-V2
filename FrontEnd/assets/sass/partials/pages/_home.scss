@@ -1,0 +1,64 @@
+section {
+    margin: auto;
+    width: 950px;
+}
+
+#introduction {
+    padding: 90px auto 90px auto;
+    gap: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    figure {
+        width: fit-content;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+        width: 475px;
+    }
+
+    article {
+        width: 400px;
+        height: auto;
+    }
+}
+
+#portfolio {
+    padding: 50px 0 50px 0;
+    box-sizing: border-box;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 90px;
+    }
+
+    #filters {
+        width: 100%;
+        gap: 15px;
+        margin-bottom: 2em;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+#contact {
+    width: 100%;
+
+    h2,
+    p {
+        text-align: center;
+    }
+
+    label,
+    input,
+    textarea {
+        text-align: left;
+    }
+
+    input[type="submit"] {
+        @include btnSubmit;
+    }
+}

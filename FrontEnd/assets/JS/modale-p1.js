@@ -21,10 +21,11 @@ const displayPageOne = () => {
     popupContent.insertAdjacentHTML("beforeend", modalPageOne)
 
     genererApercu();
+
+
     displayPageTwo();
     closeModal();
 }
-
 
 /**
  * Générer l'affichage de la gallerie dans la popup
@@ -37,11 +38,20 @@ const genererApercu = () => {
 
     localWorks.forEach((item) => {
         miniGallery.insertAdjacentHTML('beforeend', `
-            <figure>
+            <figure id="${item.id}">
                 <img src="${item.imageUrl}">
-                <button onClick="deleteWork(${item.id})" class="btnTrash" id="${item.id}"><i class="fa-regular fa-trash-can"></i></button>
+                <button  class=" btnTrash"><i class="fa-regular fa-trash-can" id="${item.id}"></i></button>
             </figure>
-        `)
+        `);
     });
-};
 
+    const btnTrash = document.querySelectorAll('.btnTrash');
+    btnTrash.forEach((btn) => {
+        btn.addEventListener('click', async event => {
+            deleteWork(event.target.id);
+            gallery.innerHTML = "";
+            await genererProjects();
+            genererApercu();
+        })
+    })
+};

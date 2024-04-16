@@ -1,4 +1,5 @@
-const newProject = new FormData();
+let addedProject = new FormData();
+
 /**
  * Contrôle le formulaire à chaque changement
  */
@@ -6,7 +7,7 @@ const validForm = () => {
     const explore = document.getElementById('explore');
     const inputProject = document.getElementById('projectName');
     const baliseSelect = document.getElementById('projectCategory');
-    
+
     explore.addEventListener('change', () => {
         validImg()
     })
@@ -26,7 +27,7 @@ const validForm = () => {
  */
 const validImg = () => {
     try {
-        let photo = document.getElementById('explore').value;
+        const photo = document.getElementById('explore').files[0];
         removeError();
         if (!photo) {
             throw new Error('Merci de sélectionner une image.');
@@ -36,8 +37,8 @@ const validImg = () => {
             throw new Error('Merci de réduire la taille de votre image');
             return false
         }
-        console.log(photo);
-        newProject.append('imageURL', photo);
+        addedProject.append('image', photo);
+
         enableAdd()
 
         return true
@@ -48,11 +49,10 @@ const validImg = () => {
 
 /**
  * Fonction qui vérifie la présence et la longueur du titre
- * @returns 
  */
 const validTitle = () => {
     try {
-        let title = document.getElementById('projectName').value;
+        const title = document.getElementById('projectName').value;
         removeError();
         if (!title) {
             throw new Error('Merci de donner un titre à votre projet');
@@ -62,11 +62,11 @@ const validTitle = () => {
             throw new Error('Le titre choisi est trop court');
             return false;
         }
-        console.log(title);
-        newProject.append('title', title);
-        enableAdd()
 
+        addedProject.append('title', title);
+        enableAdd()
         return true;
+
     } catch (error) {
         displayError(error.message);
     }
@@ -78,18 +78,18 @@ const validTitle = () => {
  */
 const validCat = () => {
     try {
-        let category = document.getElementById('projectCategory').value;
-        console.log(category.typeOf);
+        const category = document.getElementById('projectCategory').value;
         removeError();
         if (category === "") {
             throw new Error('Merci de choisir une catégorie pour votre projet');
             return false;
         }
-        console.log(category);
-        newProject.append('categoryId', category);
+
+        addedProject.append('category', category);
         enableAdd()
 
         return true
+
     } catch (error) {
         displayError(error.message)
     }
@@ -115,32 +115,64 @@ const removeError = () => {
  * Fonction qui active le bouton de soumission du formulaire
  */
 const enableAdd = () => {
-    const btn = document.getElementById('addNewProject');
-    const category = newProject.get('categoryId');
-    const title = newProject.get('title');
-    const image = newProject.get('imageURL');
+    const btnAdd = document.getElementById('btnAdd');
+    const category = document.getElementById('projectCategory').value;
+    const title = document.getElementById('projectName').value;
+    const image = document.getElementById('explore').value;
+
 
     if (!!category & !!title & !!image) {
-        btn.removeAttribute('disabled')
+        btnAdd.removeAttribute('disabled')
     }
 }
 
 /**
-     * Fonction chargée de publier le nouveau projet
-     */
+ * Fonction qui implemente la gallerie avec le projet qui vient d'etre ajouté
+ */
+const addNewFigure = (addedProject) => {
+    gallery.innerHTML = "";
+    gallery.insertAdjacentHTML('beforeend', `
+            <figure>
+                <img src="${addedProject.image}" alt="${addedProject.title}">
+                <figcaption>${addedProject.title}</figcaption>
+            </figure>
+        `);
+
+}
+
+/**
+ * Fonction chargée de publier le nouveau projet
+ */
 const publishProject = () => {
-    const addNewProject = document.querySelector('.addNewProject');
+    const btnAdd = document.querySelector('.btnAdd');
 
-    addNewProject.addEventListener('click', async (event) => {
+    btnAdd.addEventListener('click', async (event) => {
         event.preventDefault();
-        console.log(newProject);
+        const gallery = document.querySelector('.gallery');
+        const form = document.getElementById('createProject');
+        const response = await sendForm(addedProject);
+        const prevNewProject = document.querySelector('.prevNewProject');
+        const notice = document.querySelectorAll('.notice');
+        const errorBox = document.querySelector('.errorBox');
 
-        await sendForm(newProject);
-        if (Response.ok) {
+
+        if (response.ok) {
+            console.log("Projet créé avec succès");
+            gallery.innerHTML = "";
+            await genererProjects();
             form.reset();
-            //genererProjects()
+            prevNewProject.src = "";
+            errorBox.classList.add("succes");
+            errorBox.innerHTML = "Projet ajouté à la galerie";
+            notice.forEach((item) => {
+                item.hidden = false
+// NOTA-BENE : j'aurais voulu, en toute logique, pouvoir créer plusieurs projets à la suite, mais j'ai une erreur 500 lorsque j'essaie d'en créer un second. j'ai tenté de réinnitialiser le formData (c'est pour cela qu'il est en "let" et non "const") et de relancer la fonction validForm, mais ca n'a rien changé. J'ai essayé aussi, de mettre une window.alert pour informer l'utilisateur de la création du projet, et de fermer la modale, obligeant ainsi l'utilisateur à la reouvrir pour relancer le système. Sans succès non plus. Ce n'est pas demandé dans le projet donc je ne m'en preoccupe plus pour le moment, mais j'aimerais avoir la solution.
+            });
         }
         else {
+            console.log("Echec lors de la création du projet");
+            errorBox.classList.remove("succes");
+            errorBox.innerHTML = "Echec lors de la création du projet";
 
         }
     })
