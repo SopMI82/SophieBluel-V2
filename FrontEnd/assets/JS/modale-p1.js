@@ -46,7 +46,6 @@ const genererApercu = () => {
     });
 
     const btnTrash = document.querySelectorAll('.btnTrash');
-    console.log(btnTrash);
     btnTrash.forEach((btn) => {
         btn.addEventListener('click', async event => {
             deleteWork(event.target.id);

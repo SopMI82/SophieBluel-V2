@@ -1,4 +1,4 @@
-const addedProject = new FormData();
+let addedProject = new FormData();
 
 /**
  * Contrôle le formulaire à chaque changement
@@ -8,7 +8,6 @@ const validForm = () => {
     const inputProject = document.getElementById('projectName');
     const baliseSelect = document.getElementById('projectCategory');
 
-    console.log("ok1");
     explore.addEventListener('change', () => {
         validImg()
     })
@@ -29,7 +28,6 @@ const validForm = () => {
 const validImg = () => {
     try {
         const photo = document.getElementById('explore').files[0];
-        console.log(photo);
         removeError();
         if (!photo) {
             throw new Error('Merci de sélectionner une image.');
@@ -81,7 +79,6 @@ const validTitle = () => {
 const validCat = () => {
     try {
         const category = document.getElementById('projectCategory').value;
-        //console.log(category.typeOf);
         removeError();
         if (category === "") {
             throw new Error('Merci de choisir une catégorie pour votre projet');
@@ -123,7 +120,6 @@ const enableAdd = () => {
     const title = document.getElementById('projectName').value;
     const image = document.getElementById('explore').value;
 
-    console.log(category, title, image);
 
     if (!!category & !!title & !!image) {
         btnAdd.removeAttribute('disabled')
@@ -165,15 +161,19 @@ const publishProject = () => {
             gallery.innerHTML = "";
             await genererProjects();
             form.reset();
-            prevNewProject.remove();
-            notice.forEach((item) => {
-                item.hidden = false
-            });
+            prevNewProject.src = "";
             errorBox.classList.add("succes");
             errorBox.innerHTML = "Projet ajouté à la galerie";
+            notice.forEach((item) => {
+                item.hidden = false
+// NOTA-BENE : j'aurais voulu, en toute logique, pouvoir créer plusieurs projets à la suite, mais j'ai une erreur 500 lorsque j'essaie d'en créer un second. j'ai tenté de réinnitialiser le formData (c'est pour cela qu'il est en "let" et non "const") et de relancer la fonction validForm, mais ca n'a rien changé. J'ai essayé aussi, de mettre une window.alert pour informer l'utilisateur de la création du projet, et de fermer la modale, obligeant ainsi l'utilisateur à la reouvrir pour relancer le système. Sans succès non plus. Ce n'est pas demandé dans le projet donc je ne m'en preoccupe plus pour le moment, mais j'aimerais avoir la solution.
+            });
         }
         else {
             console.log("Echec lors de la création du projet");
+            errorBox.classList.remove("succes");
+            errorBox.innerHTML = "Echec lors de la création du projet";
+
         }
     })
 }

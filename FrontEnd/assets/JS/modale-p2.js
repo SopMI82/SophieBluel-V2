@@ -63,6 +63,7 @@ const showPreview = () => {
     const prevNewProject = document.querySelector('.prevNewProject');
     const notice = document.querySelectorAll('.notice');
 
+    
     explore.addEventListener('change', (event) => {
         if (event.target.files.length > 0) {
             prevNewProject.src = URL.createObjectURL(event.target.files[0]);

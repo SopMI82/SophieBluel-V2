@@ -41,7 +41,6 @@ const deleteWork = async (projectId) => {
  */
 const sendForm = async (addedProject) => {
     const token = window.localStorage.getItem("token");
-    //console.log("test", token);
     const options = {
         method: 'POST',
         headers: {

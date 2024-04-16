@@ -21,7 +21,6 @@ const genererProjects = async () => {
     await stockWorks();
 
     const works = JSON.parse(window.localStorage.getItem('works'))
-    //console.log(works);
 
     createFigures(works);
 }
