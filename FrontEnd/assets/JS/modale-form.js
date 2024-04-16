@@ -168,9 +168,9 @@ const publishProject = () => {
             prevNewProject.remove();
             notice.forEach((item) => {
                 item.hidden = false
-            })
-            errorBox.innerHTML = "Projet ajouté à la galerie"
-            errorBox.classList.add = "succes"
+            });
+            errorBox.classList.add("succes");
+            errorBox.innerHTML = "Projet ajouté à la galerie";
         }
         else {
             console.log("Echec lors de la création du projet");

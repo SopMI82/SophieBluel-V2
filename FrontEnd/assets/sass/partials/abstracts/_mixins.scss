@@ -1,0 +1,42 @@
+@mixin navLink-hover {
+    color: $secund-color;
+    cursor: pointer;
+}
+
+@mixin btnRounded {
+    height: 40px;
+    width: auto;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+@mixin mainColorBtn {
+    color: $white;
+    background-color: $main-color;
+    text-align: center;
+    border: none;
+    margin: 2em auto;
+}
+
+@mixin inputOmbre {
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+@mixin btnSubmit {
+    @include btnRounded;
+    @include mainColorBtn;
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 1.2em;
+    width: 180px;
+
+    &:hover {
+        background-color: $main-color_contrast;
+    }
+}
