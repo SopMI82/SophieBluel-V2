@@ -37,8 +37,7 @@ const sortWorks = () => {
 
 /**
  * Fonction qui gère les filtres
- */
-const manageCategories = async () => {
+ */const manageCategories = async () => {
     await generateBtn();
     sortWorks()
 }

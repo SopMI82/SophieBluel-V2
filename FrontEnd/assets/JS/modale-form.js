@@ -137,7 +137,6 @@ const addNewFigure = (addedProject) => {
                 <figcaption>${addedProject.title}</figcaption>
             </figure>
         `);
-
 }
 
 /**
@@ -167,22 +166,12 @@ const publishProject = () => {
             errorBox.innerHTML = "Projet ajouté à la galerie";
             notice.forEach((item) => {
                 item.hidden = false
-/* NOTA-BENE : j'aurais voulu, en toute logique, pouvoir créer plusieurs projets à la suite,
- mais j'ai une erreur 500 lorsque j'essaie d'en créer un second.
-J'ai tenté de réinnitialiser le formData (c'est pour cela qu'il est en "let" et non "const")
-et de relancer la fonction validForm, mais ca n'a rien changé.
-J'ai essayé aussi, de mettre une window.alert pour informer l'utilisateur de la création du projet,
-et de fermer la modale, obligeant ainsi l'utilisateur à la reouvrir pour relancer le système.
-Sans succès non plus. Ce n'est pas demandé dans le projet donc je ne m'en preoccupe plus pour le moment,
-mais j'aimerais avoir la solution.*/
-
             });
         }
         else {
             console.log("Echec lors de la création du projet");
             errorBox.classList.remove("succes");
             errorBox.innerHTML = "Echec lors de la création du projet";
-
         }
     })
 }

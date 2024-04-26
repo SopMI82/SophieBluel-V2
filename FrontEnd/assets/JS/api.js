@@ -27,7 +27,6 @@ const getCategories = async () => {
     return fetchData('http://localhost:5678/api/categories', { method: 'GET' });
 }
 
-
 /**
  * Supprimer un projet dans l'API //////////// a verifier après resolution du pb backend
  * @param {*} projectId

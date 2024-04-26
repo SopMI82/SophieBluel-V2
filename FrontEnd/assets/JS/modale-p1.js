@@ -19,10 +19,7 @@ const displayPageOne = () => {
 
     popupContent.innerHTML = "";
     popupContent.insertAdjacentHTML("beforeend", modalPageOne)
-
     genererApercu();
-
-
     displayPageTwo();
     closeModal();
 }
